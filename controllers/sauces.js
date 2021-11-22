@@ -3,13 +3,10 @@ const fs = require('fs');
 
 // Ajouter une sauce
 exports.createSauce = (req, res, next) => {
+    const sauceObject = JSON.parse(req.body.sauce);
     const sauce = new Sauce({
-        name: req.body.name,
-        manufacturer: req.body.manufacturer,
-        description: req.body.description,
-        mainPepper: req.body.mainPepper,
+        ...sauceObject,
         imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`,
-        heat: req.body.heat,
         likes: 0,
         dislikes: 0,
         usersLiked: [],
@@ -22,22 +19,83 @@ exports.createSauce = (req, res, next) => {
 
 // Like et dislike
 exports.likeSauce = (req, res, next) => {
-    // TODO Créer le middleware
+    const userId = req.body.userId; // Id de l'utilisateur
+    var userLike = req.body.like; // Statut de la note
+    var liked = false; // Boolean liké ou non
+    var disliked = false; // Boolean disliké ou non
+
+
+    const promise = Sauce.findOne({ usersLiked: userId }).exec(); //! promise marche pas
+    promise.then(function (docs) {
+        if(docs != null){
+            liked = true;
+        }
+    });
+
+    const promisetwo = Sauce.findOne({ usersDisliked: userId }).exec(); //! promise marche pas
+    promisetwo.then(function (docs) {
+        if(docs != null){
+            disliked = true;
+        }
+    });
+
+
+    if(userLike === 1){
+        //Liker une sauce
+        Sauce.updateOne({ _id: req.params.id }, 
+            {
+                $push: {usersLiked: userId},
+                $inc: {likes: 1}
+            })
+        .then(() => res.status(200).json({ message: 'Sauce likée !'}))
+        .catch(error => res.status(400).json({ error }));
+    }
+
+    if(userLike === -1){
+        // Disliker une sauce
+        Sauce.updateOne({ _id: req.params.id }, 
+            {
+                $push: {usersDisliked: userId},
+                $inc: {dislikes: 1}
+            })
+        .then(() => res.status(200).json({ message: 'Sauce dislikée !'}))
+        .catch(error => res.status(400).json({ error }));
+    }
+
+    if(userLike === 0){
+        if(liked === true){
+            // Annuler Like
+            Sauce.updateOne({ _id: req.params.id }, 
+                {
+                    $pull: {usersLiked: userId},
+                    $inc: {likes: -1}
+                })
+            .then(() => res.status(200).json({ message: 'Like annulé !'}))
+            .catch(error => res.status(400).json({ error }));
+        }
+        else{
+            // Annuler Dislike
+            Sauce.updateOne({ _id: req.params.id }, 
+                {
+                    $pull: {usersDisliked: userId},
+                    $inc: {dislikes: -1}
+                })
+            .then(() => res.status(200).json({ message: 'Dislike annulé !'}))
+            .catch(error => res.status(400).json({ error }));
+        }
+    }
 }
 
 // Modifier une sauce 
 exports.modifySauce = (req, res, next) => {
-
     const sauceObject = req.file ?
     {
       ...JSON.parse(req.body.sauce),
       imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
     } : { ...req.body };
-  Sauce.updateOne({ _id: req.params.id }, { ...sauceObject, _id: req.params.id })
-    .then(() => res.status(200).json({ message: 'Sauce modifiée !'}))
-    .catch(error => res.status(400).json({ error }));
-
-    // TODO Vérifier si ça fonctionne (voir requirements projet)
+    Sauce.updateOne({ _id: req.params.id }, { ...sauceObject, _id: req.params.id })
+        .then(() => res.status(200).json({ message: 'Sauce modifiée !'}))
+        .catch(error => res.status(400).json({ error }));
 }
 
 // Supprimer une sauce
@@ -52,7 +110,6 @@ exports.deleteSauce = (req, res, next) => {
             });
         })
         .catch(error => res.status(500).json({ error }));
-    // TODO Vérifier si ça fonctionne (voir requirements projet)
 }
 
 // Affiche une sauce spécifique
@@ -66,5 +123,5 @@ exports.displayOneSauce = (req, res, next) => {
 exports.displayAllSauces = (req, res, next) => {
     Sauce.find()
         .then(sauces => res.status(200).json(sauces))
-        .catch(error => res.status(400).json({ error }));
+        .catch(error => res.status(400).json( { error }));
 }

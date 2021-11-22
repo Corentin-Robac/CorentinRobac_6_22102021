@@ -2,6 +2,9 @@ const express = require('express');
 //const bodyParser = require('body-parser'); //deprecated
 const mongoose = require('mongoose');
 const path = require('path');
+const helmet =require('helmet'); //! Configurer helmet
+
+
 
 const saucesRoutes = require('./routes/sauces');
 const userRoutes = require('./routes/user');
