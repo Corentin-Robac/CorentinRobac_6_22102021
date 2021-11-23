@@ -6,6 +6,7 @@ Consulter les prérequis du dossier 'front'
 
 Ouvrir un terminal
     cd front
+    npm install
     npm start
 
 Ouvrir un terminal
