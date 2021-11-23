@@ -2,8 +2,7 @@ const express = require('express');
 //const bodyParser = require('body-parser'); //deprecated
 const mongoose = require('mongoose');
 const path = require('path');
-const helmet =require('helmet'); //! Configurer helmet
-
+const helmet = require('helmet');
 
 
 const saucesRoutes = require('./routes/sauces');
@@ -16,6 +15,8 @@ mongoose.connect('mongodb+srv://Crob:nUEFO09Dlqxpr78S@cluster0.qxjpf.mongodb.net
   .catch(() => console.log('Connexion à MongoDB échouée !'));
 
 const app = express();
+
+app.use(helmet());
 
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');

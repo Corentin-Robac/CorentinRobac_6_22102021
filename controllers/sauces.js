@@ -18,27 +18,23 @@ exports.createSauce = (req, res, next) => {
 }
 
 // Like et dislike
-exports.likeSauce = (req, res, next) => {
+exports.likeSauce = async (req, res, next) => {
     const userId = req.body.userId; // Id de l'utilisateur
     var userLike = req.body.like; // Statut de la note
     var liked = false; // Boolean liké ou non
     var disliked = false; // Boolean disliké ou non
 
-
-    const promise = Sauce.findOne({ usersLiked: userId }).exec(); //! promise marche pas
-    promise.then(function (docs) {
+    await Sauce.findOne({ usersLiked: userId }).then(function(docs) {
         if(docs != null){
             liked = true;
         }
     });
 
-    const promisetwo = Sauce.findOne({ usersDisliked: userId }).exec(); //! promise marche pas
-    promisetwo.then(function (docs) {
+    await Sauce.findOne({ usersDisliked: userId }).then(function(docs) {
         if(docs != null){
             disliked = true;
         }
     });
-
 
     if(userLike === 1){
         //Liker une sauce
