@@ -50,5 +50,16 @@ Utilisez `Ctrl+C` dans le terminal pour arrêter le serveur local.
 
 ## Usage Back
 
-Pour avoir accès à l'authentification, un dossier .env est requis, contactez-moi pour l'obtenir.
+Pour avoir accès à l'authentification, un dossier .env est requis, contactez-moi à l'adresse corentin.robac@laposte.net pour l'obtenir.
 Une fois en possession du fichier, importer le dans le dossier 'back'.
+
+## RGPD
+
+Pour le respect de vos données et leur sécurité, vos informations sauvegardés dans la base de données ne sont partagés à aucun tiers.
+Les mesures suivantes ont également été prises : 
+ - Le hachage est utilisé pour sécuriser vos mots de passe
+ - Les tokens d'authentification ne sont valables temporairement
+ - Il ne peut y avoir qu'un compte par adresse mail 
+ - L'accès à l'app est restreint par une variable d'environnement partagée à la demande et évalué par le propriétaire
+ - L'entête des requêtes est sécurisé
+ 
