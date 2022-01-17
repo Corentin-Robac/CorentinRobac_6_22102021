@@ -27,8 +27,8 @@ mkdir piiquante
 cd piiquante
 mkdir back
 mkdir front
-mkdir images
 cd back
+mkdir images
 git clone https://github.com/Corentin-Robac/CorentinRobac_6_22102021.git
 npm install
 npm -g nodemon
