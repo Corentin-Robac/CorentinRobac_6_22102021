@@ -33,12 +33,10 @@ cd back
 mkdir images
 npm install
 npm -g nodemon
-nodemon server
 cd ..
 cd front
 npm install
 npm install --save-dev run-script-os
-npm start
 ```
 
 ## Usage Front
@@ -49,7 +47,7 @@ L'application devrait se recharger automatiquement lorsque vous modifiez un fich
 Utilisez `Ctrl+C` dans le terminal pour arrêter le serveur local.
 
 ## Usage Back
-
+Lancer `nodemon server`
 Pour avoir accès à l'authentification, un dossier .env est requis, contactez-moi à l'adresse corentin.robac@laposte.net pour l'obtenir.
 Une fois en possession du fichier, importer le dans le dossier 'back'.
 
