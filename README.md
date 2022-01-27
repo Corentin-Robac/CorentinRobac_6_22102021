@@ -25,14 +25,12 @@ Suivez les instructions suivantes pour installer le projet
 ```
 mkdir piiquante
 cd piiquante
-git clone https://github.com/Corentin-Robac/CorentinRobac_6_22102021.git
-mv CorentinRobac_6_22102021 back
-git clone https://github.com/OpenClassrooms-Student-Center/Web-Developer-P6.git
-mv Web-Developer-P6 front
+git clone https://github.com/Corentin-Robac/CorentinRobac_6_22102021.git back
+git clone https://github.com/OpenClassrooms-Student-Center/Web-Developer-P6.git front
 cd back
 mkdir images
 npm install
-npm -g nodemon
+npm i -g nodemon
 cd ..
 cd front
 npm install
