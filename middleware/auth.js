@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken'); // Permet l'échange sécurisé de jetons entre plusieurs parties
+const dotenv = require("dotenv").config(); // Variable d'environnement
 const MY_APP_SECRET = process.env.APP_SECRET;
 
 module.exports = (req, res, next) => {
