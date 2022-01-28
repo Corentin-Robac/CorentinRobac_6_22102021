@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const saucesCtrl = require('../controllers/sauces');
-const auth = require('../middleware/auth');
-const multer = require('../middleware/multer-config');
+const saucesCtrl = require('../controllers/sauces'); // Routes API
+const auth = require('../middleware/auth'); // Réseau d'échange d'informations
+const multer = require('../middleware/multer-config'); // Téléchargement de fichiers
 
 // Ajouter une sauce
 router.post('/', auth, multer, saucesCtrl.createSauce);

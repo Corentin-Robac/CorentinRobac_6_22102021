@@ -1,7 +1,7 @@
-const http = require('http');
+const http = require('http'); // Pour utiliser le serveur et le client HTTP, il faut exiger ('http').
 const app = require('./app');
 
-const normalizePort = val => {
+const normalizePort = val => { // Renvoie un port valide, qu'il soit fourni sous la forme d'un numéro ou d'une chaîne
   const port = parseInt(val, 10);
 
   if (isNaN(port)) {
@@ -15,7 +15,7 @@ const normalizePort = val => {
 const port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
 
-const errorHandler = error => {
+const errorHandler = error => { // Recherche les différentes erreurs et les gère de manière appropriée, elle est ensuite enregistrée dans le serveur.
   if (error.syscall !== 'listen') {
     throw error;
   }
@@ -35,7 +35,7 @@ const errorHandler = error => {
   }
 };
 
-const server = http.createServer(app);
+const server = http.createServer(app); // Renvoie une nouvelle instance de Server. 
 
 server.on('error', errorHandler);
 server.on('listening', () => {
@@ -44,4 +44,4 @@ server.on('listening', () => {
   console.log('Listening on ' + bind);
 });
 
-server.listen(port);
+server.listen(port); // Ecouteur d'évènements consignant le port sur lequel le serveur s'exécute dans la console.

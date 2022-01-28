@@ -1,5 +1,5 @@
-const Sauce = require('../models/Sauce');
-const fs = require('fs');
+const Sauce = require('../models/Sauce'); // Import du schéma de données
+const fs = require('fs'); // Intéragir avec le système de fichier
 
 // Ajouter une sauce
 exports.createSauce = (req, res, next) => {

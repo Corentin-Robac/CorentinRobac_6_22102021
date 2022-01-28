@@ -1,9 +1,9 @@
-const bcrypt = require('bcrypt');
-const User = require('../models/User');
-const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt'); // Hachage
+const User = require('../models/User'); // Schéma de données
+const jwt = require('jsonwebtoken'); // Permet l'échange sécurisé de jetons entre plusieurs parties
 
-const dotenv = require("dotenv").config();
-const MY_APP_SECRET = process.env.APP_SECRET;
+const dotenv = require("dotenv").config(); // Variable d'environnement
+const MY_APP_SECRET = process.env.APP_SECRET; // Clé secrète env
 
 // Inscription
 exports.signup = (req, res, next) => {
